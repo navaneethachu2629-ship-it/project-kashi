@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Project Kashi{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-icon">K</span><span>Project Kashi<small>Banking Management Demo</small></span></a>
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('customers') }}">Customers</a>
+    <a href="{{ url_for('accounts') }}">Accounts</a>
+    <a href="{{ url_for('transactions') }}">Transactions</a>
+    <a href="{{ url_for('transfers') }}">Transfer</a>
+    <a href="{{ url_for('loans') }}">Loans</a>
+    <a href="{{ url_for('documentation') }}">Docs</a>
+  </nav>
+</header>
+<main class="container">
+  <div class="demo-banner">DEMO ONLY · No real banking or real money movement</div>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  <footer>Project Kashi · DBMS classroom project · Flask + MySQL</footer>
+</main>
+</body>
+</html>

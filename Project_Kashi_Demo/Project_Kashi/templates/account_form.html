@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Open account · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">NEW BANK ACCOUNT</p><h1>Open an account</h1><p class="muted">The account is linked to a customer and branch.</p></div><a class="button" href="{{ url_for('accounts') }}">← Back</a></div>
+{% if not customers %}<div class="notice">No customers found. <a href="{{ url_for('new_customer') }}">Create a customer first →</a></div>{% endif %}
+<form method="post" class="form-card"><div class="form-grid">
+<label class="wide">Customer *<select name="customer_id" required><option value="">Choose customer</option>{% for c in customers %}<option value="{{ c.customer_id }}">{{ c.first_name }} {{ c.last_name }} · {{ c.mobile }} (ID {{ c.customer_id }})</option>{% endfor %}</select></label>
+<label>Account type *<select name="account_type" required><option value="Saving">Saving</option><option value="Current">Current</option><option value="Salary">Salary</option></select></label>
+<label>Branch *<select name="branch_id" required>{% for b in branches %}<option value="{{ b.branch_id }}">{{ b.branch_name }} · {{ b.ifsc_code }}</option>{% endfor %}</select></label>
+<label>Opening deposit (₹) *<input name="opening_amount" type="number" min="0" step="0.01" value="500" required></label>
+</div><div class="form-footer"><span class="muted">Opening deposit creates a ledger entry.</span><button class="button primary" type="submit">Open account →</button></div></form>
+{% endblock %}

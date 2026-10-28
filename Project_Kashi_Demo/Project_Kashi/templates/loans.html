@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Loans · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">OPTIONAL MODULE</p><h1>Loan applications</h1><p class="muted">Demo records only. Applications are saved with Pending status.</p></div><a class="button primary" href="{{ url_for('new_loan') }}">＋ New loan</a></div>
+<div class="table-wrap"><table><thead><tr><th>Loan ID</th><th>Customer</th><th>Type</th><th>Branch</th><th>Amount</th><th>Rate</th><th>Tenure</th><th>Status</th></tr></thead><tbody>
+{% for l in loans %}<tr><td class="mono">LOAN-{{ l.loan_id }}</td><td>{{ l.customer_name }}</td><td>{{ l.loan_type }}</td><td>{{ l.branch_name }}</td><td class="money">₹{{ "%.2f"|format(l.loan_amount) }}</td><td>{{ l.interest_rate }}%</td><td>{{ l.tenure_months }} months</td><td><span class="status pending">{{ l.loan_status }}</span></td></tr>
+{% else %}<tr><td colspan="8" class="empty">No loan applications recorded.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

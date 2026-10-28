@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}New transaction · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CASH OPERATIONS</p><h1>Deposit or withdraw</h1><p class="muted">A successful ledger entry updates the account balance through a MySQL trigger.</p></div><a class="button" href="{{ url_for('transactions') }}">← Back</a></div>
+<form method="post" class="form-card"><div class="form-grid">
+<label class="wide">Account *<select name="account_id" required>{% for a in accounts %}<option value="{{ a.account_id }}">{{ a.account_number }} · Balance ₹{{ "%.2f"|format(a.balance) }}</option>{% endfor %}</select></label>
+<label>Transaction type *<select name="action" required><option value="DEPOSIT">Deposit</option><option value="WITHDRAWAL">Withdrawal</option></select></label>
+<label>Amount (₹) *<input type="number" name="amount" min="0.01" step="0.01" required placeholder="100.00"></label>
+<label class="wide">Description<input name="description" maxlength="255" placeholder="Demo cash deposit"></label>
+</div><div class="form-footer"><span class="muted">Withdrawals cannot exceed the available balance.</span><button class="button primary" type="submit">Submit transaction →</button></div></form>
+{% endblock %}

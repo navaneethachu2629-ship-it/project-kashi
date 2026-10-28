@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Customers · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CUSTOMER DIRECTORY</p><h1>Customers</h1><p class="muted">Customer profiles stored in the MySQL customer table.</p></div><a class="button primary" href="{{ url_for('new_customer') }}">＋ Add customer</a></div>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>Customer</th><th>Mobile</th><th>Email</th><th>City</th><th>Accounts</th></tr></thead><tbody>
+{% for c in customers %}<tr><td class="mono">CUS-{{ "%04d"|format(c.customer_id) }}</td><td><strong>{{ c.first_name }} {{ c.last_name }}</strong><small class="subline">Joined {{ c.registration_date }}</small></td><td>{{ c.mobile }}</td><td>{{ c.email or '—' }}</td><td>{{ c.city or '—' }}</td><td><span class="pill">{{ c.account_count }}</span></td></tr>
+{% else %}<tr><td colspan="6" class="empty">No customers yet. Add a customer to begin your demo.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

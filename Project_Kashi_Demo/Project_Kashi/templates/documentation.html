@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Documentation · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">PROJECT NOTES</p><h1>Database documentation</h1><p class="muted">Core entities, relationships and database concepts.</p></div></div>
+<div class="doc-grid">
+<section class="doc-card"><span class="doc-number">01</span><h2>Entities</h2><p><b>Customer</b> stores people. <b>Branch</b> stores branch details. <b>Employee</b> stores staff. <b>Account</b> stores account type, status and balance. <b>Account Holder</b> connects customers to accounts. <b>Bank Transaction</b> is the ledger. <b>Loan</b> stores loan applications and <b>Loan Payment</b> stores payment records.</p></section>
+<section class="doc-card"><span class="doc-number">02</span><h2>Cardinality</h2><ul><li>Branch 1:M Account</li><li>Branch 1:M Employee</li><li>Customer M:N Account through Account Holder</li><li>Account 1:M Bank Transaction</li><li>Customer 1:M Loan</li><li>Branch 1:M Loan</li><li>Loan 1:M Loan Payment</li></ul></section>
+<section class="doc-card"><span class="doc-number">03</span><h2>DBMS concepts</h2><p><b>PK:</b> uniquely identifies a row. <b>FK:</b> links related tables. <b>Constraint:</b> protects data quality. <b>View:</b> saved query for easier reading. <b>Trigger:</b> automatically adjusts balance after a successful ledger insert. <b>Stored function:</b> returns a value. <b>Stored procedure:</b> runs a parameterized query.</p></section>
+<section class="doc-card"><span class="doc-number">04</span><h2>Workflow</h2><ol><li>HTML form collects input.</li><li>Flask validates the request.</li><li>Connector sends SQL to MySQL.</li><li>MySQL constraints and trigger run.</li><li>Flask shows success/error feedback.</li></ol></section>
+</div>
+<div class="notice"><strong>For your report:</strong> open <code>docs/DATABASE_DOCUMENTATION.md</code>, <code>docs/ER_DIAGRAM.md</code> and <code>queries.sql</code> in the project folder.</div>
+{% endblock %}

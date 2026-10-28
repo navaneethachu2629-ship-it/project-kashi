@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Transactions · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">LEDGER</p><h1>Transactions</h1><p class="muted">Deposits, withdrawals and both sides of each transfer.</p></div><a class="button primary" href="{{ url_for('new_transaction') }}">＋ New transaction</a></div>
+<div class="action-strip"><div><strong>Need to move funds?</strong><span>Transfer between two active demo accounts.</span></div><a class="button" href="{{ url_for('transfers') }}">Make a transfer →</a></div>
+<div class="table-wrap"><table><thead><tr><th>Transaction</th><th>Account</th><th>Type</th><th>Date</th><th>Description</th><th>Reference</th><th>Amount</th><th>Status</th></tr></thead><tbody>
+{% for t in transactions %}<tr><td class="mono">#{{ t.transaction_id }}</td><td>{{ t.account_number }}</td><td><span class="pill">{{ t.transaction_type.replace('_',' ') }}</span></td><td>{{ t.transaction_date }}</td><td>{{ t.description or '—' }}</td><td class="mono">{{ t.reference_number }}</td><td class="money">₹{{ "%.2f"|format(t.amount) }}</td><td><span class="status {{ 'success' if t.transaction_status == 'SUCCESS' else 'muted-status' }}">{{ t.transaction_status }}</span></td></tr>
+{% else %}<tr><td colspan="8" class="empty">No ledger entries yet.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

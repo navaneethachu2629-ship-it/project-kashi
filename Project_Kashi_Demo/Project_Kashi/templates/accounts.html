@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block title %}Accounts · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ACCOUNT MANAGEMENT</p><h1>Accounts</h1><p class="muted">Account details, holders, branch and current demo balance.</p></div><a class="button primary" href="{{ url_for('new_account') }}">＋ Open account</a></div>
+<div class="table-wrap"><table><thead><tr><th>Account number</th><th>Account holder(s)</th><th>Type</th><th>Branch</th><th>Opened</th><th>Balance</th><th>Status</th></tr></thead><tbody>
+{% for a in accounts %}<tr><td class="mono">{{ a.account_number }}</td><td><strong>{{ a.holders or 'No holder linked' }}</strong></td><td>{{ a.account_type }}</td><td>{{ a.branch_name }}</td><td>{{ a.opening_date }}</td><td class="money">₹{{ "%.2f"|format(a.balance) }}</td><td><span class="status {{ 'success' if a.status == 'Active' else 'muted-status' }}">{{ a.status }}</span></td></tr>
+{% else %}<tr><td colspan="7" class="empty">No accounts yet. Add a customer first, then open an account.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Add customer · Project Kashi{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">CUSTOMER ONBOARDING</p><h1>Add a customer</h1><p class="muted">Required fields are marked with an asterisk.</p></div><a class="button" href="{{ url_for('customers') }}">← Back</a></div>
+<form method="post" class="form-card"><div class="form-grid">
+<label>First name *<input name="first_name" required maxlength="60" placeholder="e.g. Ananya"></label>
+<label>Last name *<input name="last_name" required maxlength="60" placeholder="e.g. Nair"></label>
+<label>Date of birth<input type="date" name="date_of_birth"></label>
+<label>Gender<select name="gender"><option value="">Select</option><option>Female</option><option>Male</option><option>Other</option><option>Prefer not to say</option></select></label>
+<label>Mobile number *<input name="mobile" required maxlength="20" placeholder="Demo number"></label>
+<label>Email<input type="email" name="email" maxlength="120" placeholder="name@example.test"></label>
+<label class="wide">Address<input name="address" maxlength="255" placeholder="Street, house or building"></label>
+<label>City<input name="city" maxlength="80" placeholder="City"></label>
+</div><div class="form-footer"><span class="muted">Saved directly to MySQL through Flask.</span><button class="button primary" type="submit">Save customer →</button></div></form>
+{% endblock %}
